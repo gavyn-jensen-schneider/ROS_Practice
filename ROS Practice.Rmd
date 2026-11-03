@@ -21,7 +21,7 @@ library(dplyr)
 ```
 
 
-```{r Packages from Regression adn Other Stories, include=FALSE}
+```{r Packages from Regression and Other Stories, include=FALSE}
 library(ggplot2)
 library(knitr)
 library(bayesplot)
