@@ -11,4 +11,5 @@ output:
 ```{r, eval=TRUE}
 datanorm <- rnorm(100, 24, 6)
 plot(datanorm)
+summary(datanorm)
 ```

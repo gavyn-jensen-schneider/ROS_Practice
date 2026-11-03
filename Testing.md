@@ -15,3 +15,12 @@ plot(datanorm)
 ```
 
 ![](Testing_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+
+``` r
+summary(datanorm)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   10.38   20.64   23.75   23.78   27.30   40.90
+```
