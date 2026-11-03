@@ -1,0 +1,59 @@
+---
+title: "Regression and Other Stories Practice"
+author: "Gavyn Jensen-Schneider"
+date: "11-03-2026"
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r Packages from Econometrics, include=FALSE}
+library(ggplot2)
+library(stats)
+library(tidyverse)
+library(stargazer)
+library(ggformula)
+library(tinytex)
+library(readr)
+library(readxl)
+library("lmtest")
+library(dplyr)
+```
+
+
+```{r Packages from Regression adn Other Stories, include=FALSE}
+library(ggplot2)
+library(knitr)
+library(bayesplot)
+library(rstanarm)
+library(rstan)
+library(loo)
+library(survey)
+library(arm)
+library(rprojroot)
+library(brms)
+library(remotes)
+library(rosdata) #connects to the data from the books Github page
+library(modelsummary)
+library(usethis)
+```
+
+
+```{r Chapter 1 Example}
+# vote share base on economic growth
+data(hibbs)
+plot(hibbs$growth, hibbs$vote, xlab="Average Recent Growth in Personal Income", ylab = "Incumbent Party's Vote Share")
+
+M1 <- stan_glm(vote ~ growth, data = hibbs)
+
+abline(coef(M1), col="blue")
+
+print(M1)
+
+#comparing LM to Stan_glm
+M2 <- lm(vote ~ growth, data = hibbs)
+
+abline(coef(M2), col="red")
+
+stargazer(M2, type = "text")
+```
