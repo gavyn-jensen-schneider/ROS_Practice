@@ -1,0 +1,24 @@
+
+<!DOCTYPE dataResource SYSTEM "dataResource.dtd" >
+<dataResource>
+    <baseName>bdry_electionresults_2022_2030</baseName>
+    <descriptiveName>Minnesota General Election Results, 2022-2030</descriptiveName>
+    <publisherID>us_mn_state_sos</publisherID>
+    <currentAsofDate>2024-11-21</currentAsofDate>
+    <topicCategories>
+        <topicCategory type="ISO 19115">boundaries</topicCategory>
+    </topicCategories>
+    <resourceIdentifiers>
+        <resourceGUID>{fa57cf9c-b5e4-4785-acad-704fb0888fca}</resourceGUID>
+    </resourceIdentifiers>
+    <dataSubResources>
+        <dataSubResource>
+            <subResourceType>fgdb</subResourceType>
+            <subResourceIdentifiers>
+                <subResourceGUID>{8118bb89-ff46-42a2-9b54-e63febeb2f36}</subResourceGUID>
+            </subResourceIdentifiers>
+            <subResourceAccess>
+            </subResourceAccess>
+        </dataSubResource>
+    </dataSubResources>
+</dataResource>

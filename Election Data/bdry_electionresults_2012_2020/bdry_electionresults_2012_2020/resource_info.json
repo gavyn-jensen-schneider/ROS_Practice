@@ -1,0 +1,8 @@
+{
+    "BaseName":"bdry_electionresults_2012_2020",
+    "DescriptiveName":" Minnesota General Election Results, 2012-2020",
+    "TopicCategories": [
+        "boundaries"
+    ],
+    "Public": true
+}

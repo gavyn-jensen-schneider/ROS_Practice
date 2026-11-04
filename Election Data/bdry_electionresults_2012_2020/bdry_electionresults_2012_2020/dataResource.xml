@@ -1,0 +1,22 @@
+﻿<!DOCTYPE dataResource SYSTEM "dataResource.dtd" >
+<dataResource>
+  <baseName>bdry_electionresults_2012_2020</baseName>
+  <descriptiveName> Minnesota General Election Results, 2012-2020</descriptiveName>
+  <publisherID>us_mn_state_sos</publisherID>
+  <currentAsofDate>2021-01-27</currentAsofDate>
+  <topicCategories>
+    <topicCategory type="ISO 19115">boundaries</topicCategory>
+  </topicCategories>
+  <resourceIdentifiers>
+    <resourceGUID>{ce433672-e27c-4335-9292-d75c4b5c42ee}</resourceGUID>
+  </resourceIdentifiers>
+  <dataSubResources>
+    <dataSubResource>
+      <subResourceType>fgdb</subResourceType>
+      <subResourceIdentifiers>
+        <subResourceGUID>{979bbaac-7bc0-4d6c-b513-f596207f0ace}</subResourceGUID>
+      </subResourceIdentifiers>
+      <subResourceAccess />
+    </dataSubResource>
+  </dataSubResources>
+</dataResource>
