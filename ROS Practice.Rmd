@@ -59,8 +59,10 @@ stargazer(M2, type = "text")
 ```
 
 
-```{r}
-
+```{r Practicing with MN Election Data}
+X1992 <- read_excel("Election Data/1992_results.xls")
+plot(X1992$PresDFL/X1992$Ballots, X1992$Ballots)
+ggplot(X1992, aes(PresDFL/Ballots, EDR/Ballots)) + geom_point() + geom_abline() + labs(x = "Percentage of Vote For DFL Candidate", y = "Percentage of Voters that Registered Same Day", title = 'Percentage of Votes for DFL Candidate by Precinct')
 ```
 
 
