@@ -57,3 +57,10 @@ abline(coef(M2), col="red")
 
 stargazer(M2, type = "text")
 ```
+
+
+```{r}
+
+```
+
+
