@@ -66,4 +66,46 @@ ggplot(X1992, aes(PresDFL/Ballots, Ballots)) + geom_point() + labs(x = "Percenta
 ggplot(X1992, aes(PresDFL/Ballots, EDR/Ballots)) + geom_point() + geom_abline() + labs(x = "Percentage of Vote For DFL Candidate", y = "Percentage of Voters that Registered Same Day", title = 'Same Day Registration and DFL Candidate Share') + geom_smooth(method = lm)
 ```
 
+```{r Chapter 5: Simulation}
+#sim for average heights
+height_sim <- function(N){
+  male <- rbinom(N, 1, 0.48)
+  height <- ifelse(male==1, rnorm(N, 69.1, 2.9), rnorm(N, 63.7, 2.7))
+  mean(height)
+}
+
+avg_height <- replicate(1000, height_sim(N=10))
+
+hist(avg_height)
+
+z <- rnorm(1e4, 5, 2)
+cat(mean(z), median(z), sd(z), mad(z))
+# MAD is median absolute deviation * 1.483 (used in special case of normal distribution) or hand calc as 1.483*median(abs(z - median(z)))
+
+
+#bootstrapping example with earnings & gender data
+data(earnings)
+earn <- earnings$earn
+male <- earnings$male
+ratio <- median(earn[male==0])/median(earn[male==1])
+
+
+boot_ratio <- function(data){
+n <- nrow(earnings)
+boot <- sample(n, replace = TRUE)
+earn_boot <- earn[boot]
+male_boot <- male[boot]
+ratio_boot <- median(earn_boot[male_boot==0]) / median(earn_boot[male_boot==1])
+}
+
+n_sims <-10000
+output <- replicate(n_sims, boot_ratio(data=earnings))
+hist(output)
+print(sd(output))
+
+
+
+```
+
+
 
