@@ -104,8 +104,57 @@ hist(output)
 print(sd(output))
 
 
+```
+
+```{r LODES Data Setup}
+library(lehdr)
+options(lehdr_use_cache = TRUE)
+library(tigris)
+options(tigris_use_cache = TRUE)
+
+
+
+rac <- grab_lodes(state = "mn", year = 2002:2023, lodes_type = "rac",
+                  job_type = "JT01", segment = "S000",
+                  agg_geo = "block", download_dir = "~/R Files/myrepo/Lodes",
+                  use_cache = TRUE, geometry = TRUE)
+
+xwalk <- grab_crosswalk("mn", download_dir = "~/R Files/myrepo/Lodes")
+
+mcd <- rac %>%
+  left_join(dplyr::select(xwalk, tabblk2020, ctycsub),
+            by = c("h_geocode" = "tabblk2020")) %>%
+  group_by(year, ctycsub) %>%
+  summarise(across(c(C000, starts_with("CNS")), sum), .groups = "drop")
 
 ```
+
+```{r}
+library(tigris)
+library(sf)
+library(dplyr)
+library(ggplot2)
+options(tigris_use_cache = TRUE)
+
+mn_mcd <- county_subdivisions("MN", year = 2020, cb = TRUE)   # 2020 boundaries match LODES8
+
+map_df <- mn_mcd |>
+  left_join(filter(mcd, year == 2002), by = c("GEOID" = "ctycsub")) |>
+  mutate(mfg_share = CNS05 / C000)
+
+ggplot(map_df) +
+  geom_sf(aes(fill = mfg_share), color = NA) +
+  scale_fill_viridis_c(labels = scales::percent, na.value = "grey85") +
+  labs(title = "Manufacturing share of residents' jobs, 2002",
+       fill = NULL, caption = "LODES8 RAC, primary jobs") +
+  theme_void()
+
+X2002_general_results <- read_excel("~/R Files/myrepo/Election Data/2002_general_results.xls", skip = 2)
+tibble(X2002_general_results)
+
+```
+
+
 
 
 
