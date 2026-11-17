@@ -330,8 +330,64 @@ prior=normal(0, 0.2), prior_intercept=normal(48.8, 0.5))
 print(fit_post)
 ```
 
-```{r}
+```{r Ch 10}
+data(kidiq)
+ggplot(data = kidiq, aes(kid_score)) + geom_histogram()
+R1 <- stan_glm(kid_score ~ mom_hs, data = kidiq)
+ggplot(data = kidiq, aes(mom_hs, kid_score)) + geom_point() + geom_smooth(method = "lm")
+print(R1)
 
+R2 <- stan_glm(kid_score ~ mom_iq, data = kidiq)
+ggplot(data = kidiq, aes(mom_iq, kid_score)) + geom_point() + geom_smooth(method = "lm")
+print(R2)
+
+R3 <- stan_glm(kid_score ~ mom_hs + mom_iq, data = kidiq)
+ggplot(data = kidiq, aes(x=mom_iq, y=kid_score, color = factor(mom_hs))) + geom_point() + geom_smooth(method = "lm")
+print(R3)
+
+R4 <- stan_glm(kid_score ~ mom_hs + mom_iq + mom_hs:mom_iq, data = kidiq)
+ggplot(data = kidiq, aes(x=mom_iq, y=kid_score, color = factor(mom_hs))) + geom_point() + geom_smooth(method = "lm")
+print(R4)
+
+
+data("earnings")
+fit_1 <- stan_glm(weight ~ height, data=earnings)
+print(fit_1)
+new <- data.frame(height=66)
+pred <- posterior_predict(fit_1, newdata=new)
+cat("Predicted weight for a 66-inch-tall person is", round(mean(pred)),
+"pounds with a sd of", round(sd(pred)), "\n")
+
+earnings$c_height <- earnings$height - 66
+fit_2 <- stan_glm(weight ~ c_height, data=earnings)
+print(fit_2)
+
+fit_3 <- stan_glm(weight ~ c_height + male, data=earnings)
+print(fit_3)
+new <- data.frame(c_height=4.0, male=0)
+pred <- posterior_predict(fit_3, newdata=new)
+cat("Predicted weight for a 70-inch-tall woman is", round(mean(pred)),
+"pounds with a sd of", round(sd(pred)), "\n")
+
+fit_4 <- stan_glm(weight ~ c_height + male + factor(ethnicity), data=earnings)
+print(fit_4)
+
+earnings$eth <- factor(earnings$ethnicity,
+levels=c("White", "Black", "Hispanic", "Other"))
+fit_5 <- stan_glm(weight ~ c_height + male + eth, data=earnings)
+print(fit_5)
+
+data("congress")
+plot(congress$v86_adj, congress$v88_adj)
+
+data88 <- data.frame(vote=congress$v88_adj, past_vote=congress$v86_adj,
+inc=congress$inc88)
+fit88 <- stan_glm(vote ~ past_vote + inc, data=data88)
+sims88 <- as.matrix(fit88)
+
+data90 <- data.frame(past_vote=congress$v88_adj, inc=congress$inc90)
+pred90 <- posterior_predict(fit88, newdata=data90)
+dems_pred <- rowSums(pred90 > 0.5)
 
 ```
 
